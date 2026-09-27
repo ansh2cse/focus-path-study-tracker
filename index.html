@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0f172a" />
+    <title>Focus Path — Study Tracker</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="hero">
+        <div>
+          <p class="eyebrow">YOUR LEARNING RHYTHM</p>
+          <h1>Focus Path</h1>
+          <p class="hero-copy">Keep every topic moving, one intentional study session at a time.</p>
+        </div>
+        <div class="today" id="todayLabel"></div>
+      </header>
+
+      <section class="overview" aria-label="Study overview">
+        <article class="stat-card"><span>Minutes focused</span><strong id="focusedMinutes">0h 0m</strong><small>across all topics</small></article>
+        <article class="stat-card"><span>Topics on track</span><strong id="onTrackCount">0</strong><small>meeting their planned pace</small></article>
+        <article class="stat-card accent"><span>Study today</span><strong id="todayMinutes">0m</strong><small id="todayPrompt">Start with 25 minutes</small></article>
+      </section>
+
+      <section class="workspace">
+        <aside class="panel action-panel">
+          <div class="panel-heading"><p class="eyebrow">PLAN</p><h2>Add a topic</h2></div>
+          <form id="topicForm">
+            <label>Topic <input id="topicName" required maxlength="60" placeholder="e.g. Organic chemistry" /></label>
+            <div class="two-columns">
+              <label>Due date <input id="topicDue" type="date" required /></label>
+              <label>Topic length <div class="length-input"><input id="topicLength" type="number" min="1" required placeholder="12" /><select id="lengthUnit" aria-label="Length unit"><option value="hours">hours</option><option value="minutes">mins</option></select></div></label>
+            </div>
+            <button class="primary-btn" type="submit">Add topic <span>→</span></button>
+          </form>
+          <hr />
+          <div class="panel-heading"><p class="eyebrow">LOG</p><h2>Record today’s work</h2></div>
+          <form id="logForm">
+            <label>Topic <select id="logTopic" required></select></label>
+            <div class="two-columns">
+              <label>Date <input id="logDate" type="date" required /></label>
+              <label>Time studied <div class="length-input"><input id="logMinutes" type="number" min="1" required placeholder="45" /><select id="logUnit" aria-label="Time unit"><option value="minutes">mins</option><option value="hours">hours</option></select></div></label>
+            </div>
+            <button class="dark-btn" type="submit">Log study session</button>
+          </form>
+          <p class="form-note" id="formNote" aria-live="polite">Topics and study logs save automatically on this device.</p>
+        </aside>
+
+        <section class="progress-area" aria-label="Topic progress">
+          <div class="section-title"><div><p class="eyebrow">DASHBOARD</p><h2>Your topics</h2></div><button class="text-btn" id="clearAll" type="button">Clear all data</button></div>
+          <div class="topic-list" id="topicList"></div>
+          <div class="empty-state" id="emptyState"><div class="empty-icon">✦</div><h3>Your path starts here</h3><p>Add a topic and its deadline to see a paced study plan.</p></div>
+        </section>
+      </section>
+    </main>
+    <template id="topicTemplate">
+      <article class="topic-card">
+        <div class="topic-top"><div><h3 class="topic-title"></h3><p class="topic-meta"></p></div><button class="delete-btn" type="button" aria-label="Delete topic">×</button></div>
+        <div class="progress-row"><div class="progress-track"><div class="progress-fill"></div></div><strong class="progress-label"></strong></div>
+        <div class="topic-details"><span class="pace"></span><span class="due-status"></span></div>
+      </article>
+    </template>
+    <script src="app.js"></script>
+  </body>
+</html>
